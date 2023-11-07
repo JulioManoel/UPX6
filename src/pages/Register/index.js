@@ -28,11 +28,11 @@ export default function SignIn() {
                 <TextInput placeholder='Insira sua senha' style={styles.inputText}/>
                 
                 <Text style={styles.inputTitle}>Confirmar senha</Text>
-                <TextInput placeholder='Insira sua senha' style={styles.inputText}/>
+                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText}/>
 
                 <TouchableOpacity
                 style={styles.registerButton}
-                onPress={ () => navigation.navigate('Apprentices')}>
+                onPress={ () => navigation.navigate('BottomNav')}>
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>

@@ -2,12 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import ProfilePicture from '../assets/profilePicture.png'
+// import ProfilePicture from '../assets/profilePicture.png'
 
 const apprentices = [
     {
         id: '001',
-        ProfilePicture: ProfilePicture,
+        // ProfilePicture: ProfilePicture,
+        ProfilePicture: require('../assets/profilePicture.png'),
         name: 'Caio Rodrigues',
         department: 'IT - Information Technology',
         generalRating:  '4.2'
@@ -45,7 +46,8 @@ export default function ApprenticeList() {
             renderItem={({item})=><View>
                                     <TouchableOpacity style={styles.itemContainer}>
                                         <Text style={styles.apprenticeName}>{item.name}</Text>
-                                        <Text style={styles.apprenticeName}>{item.ProfilePicture}</Text>
+                                        {/* <Text style={styles.apprenticeName}>{item.ProfilePicture}</Text> */}
+                                        <Image source={item.ProfilePicture} />
                                         <Text style={styles.apprenticeDepartment}> {item.department}</Text>
                                         <Text style={styles.apprenticeDepartment}> {item.generalRating}</Text>
                                     </TouchableOpacity>
