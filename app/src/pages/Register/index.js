@@ -10,12 +10,12 @@ export default function SignIn() {
 
     return (
         <View style={styles.container}>
-            <View style={styles.containerHeader}>
-                <Image source={require('../../assets/itemmLogo.png')}/>
+            <Animatable.View animation='fadeInLeft' delay={200} style={styles.containerHeader}>
+                <Image source={require('../../assets/itemmLogo.png')} style={styles.imageLogo}/>
                 <Text style={styles.underText}>Avaliação de Trabalho Invididual</Text>
-            </View>
+            </Animatable.View>
 
-            <View style={styles.containerForm}>
+            <Animatable.View animation='fadeInUp' style={styles.containerForm}>
                 <Text style={styles.welcomeText}>Cadastro</Text>
 
                 <Text style={styles.inputTitle}>Nome completo</Text>
@@ -32,10 +32,10 @@ export default function SignIn() {
 
                 <TouchableOpacity
                 style={styles.registerButton}
-                onPress={ () => navigation.navigate('SignIn')}>
+                onPress={ () => navigation.navigate('Apprentices')}>
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
         </View>
     );
 }
@@ -48,22 +48,24 @@ const styles = StyleSheet.create({
     },
 
     containerHeader:{
-        marginTop:'24%',
-        marginBottom:'18%',
+        marginTop:'0%',
+        marginBottom:'8%',
         paddingStart: '5%',
         paddingEnd: '5%',
         alignSelf: 'center',
     },
 
     imageLogo:{
-        marginTop: '14%',
+        marginLeft: '18%',
         alignSelf: 'center'
     },
 
     underText:{
         alignSelf: 'center',
-        marginTop: '2%',
-        color: '#023020'
+        marginTop: '-8%',
+        color: '#F5F5F5',
+        fontSize: 20,
+        fontWeight: 'bold',
     },
 
     containerForm:{
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
 
     welcomeText:{
         fontSize: 28,
-        color:'#097969',
+        color:'#004DA1',
         fontWeight: 'bold',
         marginTop: '5%',
         marginBottom: '6%',
@@ -106,13 +108,13 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginTop: '10%',
         borderRadius: 20,  
-        borderColor: '#097969',
+        borderColor: '#004DA1',
         borderWidth: 2,
     },
 
     registerButtonText:{
         fontSize: 18,
-        color: '#097969',
+        color: '#004DA1',
         fontWeight: 'bold',
     },
 
