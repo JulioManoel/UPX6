@@ -1,17 +1,41 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native'
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
 import * as Animatable from 'react-native-animatable'
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../../firebase/config'
 
 
-export default function SignIn() {
-    const navigation = useNavigation();
-    
+export default function SignIn({ navigation }) {
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [loading, setLoading] = useState(false)
+
+
+    const cadastro = async () => {
+        setLoading(true)
+        try {
+            if (password === confirmPassword) {
+                const res = await createUserWithEmailAndPassword(auth, email, password)
+                if (res) navigation.navigate('BottomNav')
+            }
+
+        } catch {
+            Alert.alert('Error', 'Erro ao registrar', [{ text: 'OK' }])
+        }
+        setLoading(false)
+    }
+
+
+
+
 
     return (
         <View style={styles.container}>
             <Animatable.View animation='fadeInLeft' delay={200} style={styles.containerHeader}>
-                <Image source={require('../../assets/itemmLogo.png')} style={styles.imageLogo}/>
+                <Image source={require('../../assets/itemmLogo.png')} style={styles.imageLogo} />
                 <Text style={styles.underText}>Avaliação de Trabalho Invididual</Text>
             </Animatable.View>
 
@@ -19,20 +43,20 @@ export default function SignIn() {
                 <Text style={styles.welcomeText}>Cadastro</Text>
 
                 <Text style={styles.inputTitle}>Nome completo</Text>
-                <TextInput placeholder='Insira seu nome' style={styles.inputText}/>
+                <TextInput placeholder='Insira seu nome' style={styles.inputText} value={name} onChangeText={text => setName(text)} />
 
                 <Text style={styles.inputTitle}>Email</Text>
-                <TextInput placeholder='Insira seu email' style={styles.inputText}/>
+                <TextInput placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
 
                 <Text style={styles.inputTitle}>Senha</Text>
-                <TextInput placeholder='Insira sua senha' style={styles.inputText}/>
-                
+                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
+
                 <Text style={styles.inputTitle}>Confirmar senha</Text>
-                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText}/>
+                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={confirmPassword} onChangeText={text => setConfirmPassword(text)} />
 
                 <TouchableOpacity
-                style={styles.registerButton}
-                onPress={ () => navigation.navigate('BottomNav')}>
+                    style={styles.registerButton}
+                    onPress={() => cadastro()}>
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
@@ -42,25 +66,25 @@ export default function SignIn() {
 
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
         backgroundColor: '#004DA1',
     },
 
-    containerHeader:{
-        marginTop:'0%',
-        marginBottom:'8%',
+    containerHeader: {
+        marginTop: '0%',
+        marginBottom: '8%',
         paddingStart: '5%',
         paddingEnd: '5%',
         alignSelf: 'center',
     },
 
-    imageLogo:{
+    imageLogo: {
         marginLeft: '18%',
         alignSelf: 'center'
     },
 
-    underText:{
+    underText: {
         alignSelf: 'center',
         marginTop: '-8%',
         color: '#F5F5F5',
@@ -68,7 +92,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 
-    containerForm:{
+    containerForm: {
         alignSelf: 'center',
         width: '72%',
         height: '66%',
@@ -76,22 +100,22 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
-    welcomeText:{
+    welcomeText: {
         fontSize: 28,
-        color:'#004DA1',
+        color: '#004DA1',
         fontWeight: 'bold',
         marginTop: '5%',
         marginBottom: '6%',
         alignSelf: 'center'
     },
-    
-    inputTitle:{
+
+    inputTitle: {
         fontSize: 20,
         marginTop: 20,
         marginLeft: '10%',
     },
 
-    inputText:{
+    inputText: {
         borderBottomWidth: 1,
         height: 40,
         width: '80%',
@@ -99,7 +123,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
 
-    registerButton:{
+    registerButton: {
         backgroundColor: '#F5F5F5',
         height: '8%',
         width: '60%',
@@ -107,12 +131,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: '10%',
-        borderRadius: 20,  
+        borderRadius: 20,
         borderColor: '#004DA1',
         borderWidth: 2,
     },
 
-    registerButtonText:{
+    registerButtonText: {
         fontSize: 18,
         color: '#004DA1',
         fontWeight: 'bold',
