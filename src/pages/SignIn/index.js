@@ -21,15 +21,15 @@ export default function SignIn({ navigation }) {
         try {
 
             const res = await signInWithEmailAndPassword(auth, email, password)
-            if (res) navigation.navigate('BottomNav')
+            if (res) navigation.navigate('Home')
 
         } catch {
-            Alert.alert('Error', 'Erro ao logar', [{ text: 'OK' }])
+            Alert.alert('Email ou senha inválida!', 'Verifique as credenciais e tente novamente', [{ text: 'OK' }])
         }
         setLoading(false)
     }
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior='position' style={styles.container}>
             <Animatable.View animation='fadeInLeft' delay={500} style={styles.containerHeader}>
                 <Image source={require('../../assets/itemmLogo.png')} style={styles.imageLogo} />
                 <Text style={styles.underText}>Avaliação de Trabalho Individual</Text>
@@ -57,7 +57,7 @@ export default function SignIn({ navigation }) {
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     containerForm: {
         alignSelf: 'center',
         width: '72%',
-        height: '56%',
+        height: '300',
         backgroundColor: '#F5F5F5',
         borderRadius: 20,
     },

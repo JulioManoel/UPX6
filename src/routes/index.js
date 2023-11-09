@@ -3,8 +3,9 @@ import  { createNativeStackNavigator } from '@react-navigation/native-stack'
 import Welcome from '../pages/Welcome'
 import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
-import BottomNav from './bottomNav'
-// import Apprentices from '../pages/Apprentices'
+import Home from '../pages/Home'
+import Apprentice from '../pages/Apprentice'
+import Profile from '../pages/Profile'
 
 const Stack = createNativeStackNavigator();
 
@@ -30,16 +31,23 @@ export default function Routes(){
         />
         
         <Stack.Screen 
-            name='BottomNav'
-            component={BottomNav}
+            name='Home'
+            component={Home}
             options={{ headerShown: false}}
         />
 
-        {/* <Stack.Screen
-            name='Apprentices'
-            component={Apprentices}
+        <Stack.Screen
+            name='Apprentice'
+            component={Apprentice}
             options={{ headerShown: false}}
-        /> */}
+        />
+
+        <Stack.Screen
+            name='Profile'
+            component={Profile}
+            options={{ headerShown: false}}
+        />
+        
         </Stack.Navigator>
     )
 }

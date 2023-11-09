@@ -2,34 +2,39 @@ import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
 import * as Animatable from 'react-native-animatable'
+import StarIcon from './icons/StarIcon'
+
+
 // import ProfilePicture from '../assets/profilePicture.png'
 
 const apprentices = [
     {
         id: '001',
-        // ProfilePicture: ProfilePicture,
-        ProfilePicture: require('../assets/profilePicture.png'),
+        ProfilePicture: require('../assets/profilePicture2.png'),
         name: 'Caio Rodrigues',
         department: 'IT - Information Technology',
-        generalRating:  '4.2'
+        rating:  '4.2'
     },
     {
         id: '002',
+        ProfilePicture: require('../assets/profilePicture3.png'),
         name: 'Miguel Ferreira',
         department: 'HR - Human Resources',
-        generalRating:  '3.2'
+        rating:  '3.2'
     },
     {
         id: '003',
+        ProfilePicture: require('../assets/profilePicture4.png'),
         name: 'Valéria Nóbrega',
         department: 'PD - Product Development',
-        generalRating:  '4.8'
+        rating:  '4.8'
     },
     {
         id: '004',
+        ProfilePicture: require('../assets/profilePicture5.png'),
         name: 'Luiza Martins',
         department: 'DM - Data Management',
-        generalRating:  '4.5'
+        rating:  '4.5'
     },
 ]
 
@@ -44,12 +49,23 @@ export default function ApprenticeList() {
             data={apprentices}
             keyExtractor={item=>item.id}
             renderItem={({item})=><View>
-                                    <TouchableOpacity style={styles.itemContainer}>
-                                        <Text style={styles.apprenticeName}>{item.name}</Text>
-                                        {/* <Text style={styles.apprenticeName}>{item.ProfilePicture}</Text> */}
-                                        <Image source={item.ProfilePicture} />
-                                        <Text style={styles.apprenticeDepartment}> {item.department}</Text>
-                                        <Text style={styles.apprenticeDepartment}> {item.generalRating}</Text>
+                                    <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
+                                        <View style={styles.apprenticePictureContainer}>
+                                            <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
+                                        </View>
+                                        <View style={styles.apprenticeInfoContainer}>
+                                            <Text style={styles.apprenticeName}>{item.name}</Text>
+
+                                            <Text style={styles.apprenticeDepartment}> {item.department}</Text>
+                                        </View>
+                                        <View style={styles.apprenticeRatingContainer}>
+                                            <View>
+                                                <StarIcon/>
+                                            </View>
+                                            <View>
+                                                <Text style={styles.apprenticeRating}> {item.rating}</Text>
+                                            </View>
+                                        </View>
                                     </TouchableOpacity>
                                 </View>}
         />
@@ -70,7 +86,10 @@ const styles = StyleSheet.create({
         marginTop: '16%',
     },
 
-    itemContainer: {
+    apprenticeCard: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
         margin: 10,
         padding: 10,
         alignSelf: 'center',
@@ -79,8 +98,37 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
 
+    apprenticePicture: {
+        width: 50,
+        height: 50
+,    },
+
+    apprenticeInfoContainer: {
+        display: 'flex',
+        marginLeft: '3%',
+        justifyContent: 'center',
+    },
+
     apprenticeName: {
         fontSize: 14,
+        fontWeight: '500'
+    },
+
+    apprenticeDepartment: {
+        fontWeight: '500'
+    },
+
+    apprenticeRatingContainer: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginRight: 0,
+        marginLeft: 'auto'
+    },
+
+    apprenticeRating: {
+        fontWeight: 'bold',
     },
 })
 
