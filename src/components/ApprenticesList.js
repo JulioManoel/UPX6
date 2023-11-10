@@ -25,7 +25,7 @@ const apprentices = [
     {
         id: '003',
         ProfilePicture: require('../assets/profilePicture4.png'),
-        name: 'Valéria Nóbrega',
+        name: 'Valéria Ferreira',
         department: 'PD - Product Development',
         rating:  '4.8'
     },

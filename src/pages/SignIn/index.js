@@ -41,7 +41,7 @@ export default function SignIn({ navigation }) {
                 <TextInput placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
 
                 <Text style={styles.inputTitle}>Senha</Text>
-                <TextInput placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
+                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
 
                 <TouchableOpacity style={styles.button}
                     onPress={() => valida()}>

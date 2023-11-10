@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, Alert } from 'react-native'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Image, Alert } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../firebase/config'
@@ -33,7 +33,7 @@ export default function SignIn({ navigation }) {
 
 
     return (
-        <View style={styles.container}>
+        <KeyboardAvoidingView behavior='position' style={styles.container}>
             <Animatable.View animation='fadeInLeft' delay={200} style={styles.containerHeader}>
                 <Image source={require('../../assets/itemmLogo.png')} style={styles.imageLogo} />
                 <Text style={styles.underText}>Avaliação de Trabalho Invididual</Text>
@@ -60,14 +60,13 @@ export default function SignIn({ navigation }) {
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
-        </View>
+        </KeyboardAvoidingView>
     );
 }
 
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#004DA1',
     },
 
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
     containerForm: {
         alignSelf: 'center',
         width: '72%',
-        height: '66%',
+        height: 620,
         backgroundColor: '#F5F5F5',
         borderRadius: 20,
     },
