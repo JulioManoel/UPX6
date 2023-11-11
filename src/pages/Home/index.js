@@ -10,7 +10,7 @@ export default function Home() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
+        <View  style={styles.container}>
             <ManagerHeader style={styles.ManagerHeader}/>
             <ApprenticeList style={styles.ApprenticeList} />
         </View>

@@ -42,34 +42,38 @@ export default function ApprenticeList() {
     const navigation = useNavigation();
 
     return (
-
         <View style={styles.apprenticeListContainer}>
-            <Text style={styles.apprenticeText}>Aprendizes</Text>
-        <FlatList
-            data={apprentices}
-            keyExtractor={item=>item.id}
-            renderItem={({item})=><View>
-                                    <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
-                                        <View style={styles.apprenticePictureContainer}>
-                                            <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
-                                        </View>
-                                        <View style={styles.apprenticeInfoContainer}>
-                                            <Text style={styles.apprenticeName}>{item.name}</Text>
+            <Animatable.View animation='fadeIn' delay={400}>
+                <Text style={styles.apprenticeText}>Aprendizes</Text>
+            </Animatable.View>
+            <Animatable.View animation='fadeInRight' delay={400}>
+                <FlatList
+                    data={apprentices}
+                    keyExtractor={item=>item.id}
+                    renderItem={({item})=><View>
+                                            <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
+                                                <View style={styles.apprenticePictureContainer}>
+                                                    <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
+                                                </View>
+                                                <View style={styles.apprenticeInfoContainer}>
+                                                    <Text style={styles.apprenticeName}>{item.name}</Text>
 
-                                            <Text style={styles.apprenticeDepartment}> {item.department}</Text>
-                                        </View>
-                                        <View style={styles.apprenticeRatingContainer}>
-                                            <View>
-                                                <StarIcon/>
-                                            </View>
-                                            <View>
-                                                <Text style={styles.apprenticeRating}> {item.rating}</Text>
-                                            </View>
-                                        </View>
-                                    </TouchableOpacity>
-                                </View>}
-        />
+                                                    <Text style={styles.apprenticeDepartment}> {item.department}</Text>
+                                                </View>
+                                                <View style={styles.apprenticeRatingContainer}>
+                                                    <View>
+                                                        <StarIcon/>
+                                                    </View>
+                                                    <View>
+                                                        <Text style={styles.apprenticeRating}> {item.rating}</Text>
+                                                    </View>
+                                                </View>
+                                            </TouchableOpacity>
+                                        </View>}
+                />
+        </Animatable.View>
         </View>
+        
     );
 }
 

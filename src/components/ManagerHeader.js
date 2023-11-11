@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
-import * as Animatable from 'react-native-animatable'
 
 const userName = 'João'
 
@@ -9,15 +8,34 @@ export default function ManagerHeader() {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.welcomeText}>Olá, {userName}!</Text>
-            <Image source={require('../assets/profilePicture.png')} style={styles.profilePicture}/>
+        <View>
+            <View style={styles.headerBar}>
+                <Text style={styles.managerText}>GESTOR</Text>
+            </View>
+            <View style={styles.container}>
+                <Text style={styles.welcomeText}>Olá, {userName}!</Text>
+                <Image source={require('../assets/profilePicture.png')} style={styles.profilePicture}/>
+            </View>
         </View>
+
 
     );
 }
 
 const styles = StyleSheet.create({
+
+    headerBar: {
+        backgroundColor: '#004DA1',
+    },
+
+    managerText: {
+        marginTop: 24,
+        marginBottom: 14,
+        color: '#F5F5F5',
+        fontSize: 20,
+        fontWeight: 'bold',
+        alignSelf: 'center'
+    },
 
     container: {
         flexDirection: 'row',

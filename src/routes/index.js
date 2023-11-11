@@ -5,7 +5,7 @@ import SignIn from '../pages/SignIn'
 import Register from '../pages/Register'
 import Home from '../pages/Home'
 import Apprentice from '../pages/Apprentice'
-import Profile from '../pages/Profile'
+import Evaluation from '../pages/Evaluation'
 
 const Stack = createNativeStackNavigator();
 
@@ -43,9 +43,10 @@ export default function Routes(){
         />
 
         <Stack.Screen
-            name='Profile'
-            component={Profile}
-            options={{ headerShown: false}}
+            name='Evaluation'
+            component={Evaluation}
+            options={{ headerShown: false} }
+            
         />
         
         </Stack.Navigator>
