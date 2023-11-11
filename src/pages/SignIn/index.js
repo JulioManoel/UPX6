@@ -1,33 +1,22 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Alert } from 'react-native'
+import { Text, StyleSheet, TextInput, TouchableOpacity, Image, KeyboardAvoidingView, Alert, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import { auth } from '../../firebase/config'
-import { signInWithEmailAndPassword } from 'firebase/auth';
-
-
+import { store } from '../../store';
 
 export default function SignIn({ navigation }) {
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
-
-
-    const valida = async () => {
+    const onSubmit = async () => {
         setLoading(true)
 
-        try {
+        await store.user.login({ email, password })
+        if (store.user.state.currentUser) navigation.navigate('Home')
 
-            const res = await signInWithEmailAndPassword(auth, email, password)
-            if (res) navigation.navigate('Home')
-
-        } catch {
-            Alert.alert('Email ou senha inválida!', 'Verifique as credenciais e tente novamente', [{ text: 'OK' }])
-        }
         setLoading(false)
     }
+
     return (
         <KeyboardAvoidingView behavior='position' style={styles.container}>
             <Animatable.View animation='fadeInLeft' delay={500} style={styles.containerHeader}>
@@ -38,29 +27,28 @@ export default function SignIn({ navigation }) {
             <Animatable.View animation='fadeInUp' style={styles.containerForm}>
                 <Text style={styles.welcomeText}>Bem-vindo(a)</Text>
                 <Text style={styles.inputTitle}>Email</Text>
-                <TextInput placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
+                <TextInput autoCapitalize="none" placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
 
                 <Text style={styles.inputTitle}>Senha</Text>
-                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
+                <TextInput secureTextEntry={true} autoCapitalize="none" placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
 
-                <TouchableOpacity style={styles.button}
-                    onPress={() => valida()}>
-
-                    <Text style={styles.buttonText}>Conectar</Text>
+                <TouchableOpacity style={styles.button} onPress={() => onSubmit()}>
+                    {loading ? (
+                        <ActivityIndicator size="large" color="#FFFFFF" />
+                    ) : (
+                        <Text style={styles.buttonText}>Conectar</Text>
+                    )}
                 </TouchableOpacity>
 
                 <Text style={styles.alternativeText}>ou</Text>
 
-                <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>
         </KeyboardAvoidingView>
-    );
+    )
 }
-
 
 const styles = StyleSheet.create({
     container: {

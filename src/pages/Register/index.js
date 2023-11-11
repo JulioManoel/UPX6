@@ -1,36 +1,23 @@
-import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Image, Alert } from 'react-native'
+import { Text, StyleSheet, TextInput, TouchableOpacity, KeyboardAvoidingView, Image, Alert, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../../firebase/config'
+import { store } from '../../store';
 
-
-export default function SignIn({ navigation }) {
+export default function Register({ navigation }) {    
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
     const [loading, setLoading] = useState(false)
 
-
-    const cadastro = async () => {
+    const onSubmit = async () => {
         setLoading(true)
-        try {
-            if (password === confirmPassword) {
-                const res = await createUserWithEmailAndPassword(auth, email, password)
-                if (res) navigation.navigate('BottomNav')
-            }
-
-        } catch {
-            Alert.alert('Error', 'Erro ao registrar', [{ text: 'OK' }])
-        }
+        
+        if (password === confirmPassword) await store.user.create({name, email, password})
+        if (store.user.state.currentUser) navigation.navigate('Home')
+        
         setLoading(false)
     }
-
-
-
-
 
     return (
         <KeyboardAvoidingView behavior='position' style={styles.container}>
@@ -46,18 +33,20 @@ export default function SignIn({ navigation }) {
                 <TextInput placeholder='Insira seu nome' style={styles.inputText} value={name} onChangeText={text => setName(text)} />
 
                 <Text style={styles.inputTitle}>Email</Text>
-                <TextInput placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
+                <TextInput autoCapitalize="none" placeholder='Insira seu email' style={styles.inputText} value={email} onChangeText={text => setEmail(text)} />
 
                 <Text style={styles.inputTitle}>Senha</Text>
-                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
+                <TextInput autoCapitalize="none" secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={password} onChangeText={text => setPassword(text)} />
 
                 <Text style={styles.inputTitle}>Confirmar senha</Text>
-                <TextInput secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={confirmPassword} onChangeText={text => setConfirmPassword(text)} />
+                <TextInput autoCapitalize="none" secureTextEntry={true} placeholder='Insira sua senha' style={styles.inputText} value={confirmPassword} onChangeText={text => setConfirmPassword(text)} />
 
-                <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => cadastro()}>
-                    <Text style={styles.registerButtonText}>Cadastre-se</Text>
+                <TouchableOpacity style={styles.registerButton} onPress={() => onSubmit()}>
+                    { loading ? (
+                        <ActivityIndicator size="large" color="#004DA1" />
+                    ) : (
+                        <Text style={styles.registerButtonText}>Cadastre-se</Text>
+                    )}
                 </TouchableOpacity>
             </Animatable.View>
         </KeyboardAvoidingView>
