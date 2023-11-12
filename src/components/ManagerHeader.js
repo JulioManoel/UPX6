@@ -1,11 +1,10 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import { store } from '../store';
 
-const userName = 'João'
 
 export default function ManagerHeader() {
-    const navigation = useNavigation();
+    const userName = store.user.state.currentUser.displayName
 
     return (
         <View>
@@ -17,8 +16,6 @@ export default function ManagerHeader() {
                 <Image source={require('../assets/profilePicture.png')} style={styles.profilePicture}/>
             </View>
         </View>
-
-
     );
 }
 

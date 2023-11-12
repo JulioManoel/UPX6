@@ -4,37 +4,34 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react
 import * as Animatable from 'react-native-animatable'
 import StarIcon from './icons/StarIcon'
 
-
-// import ProfilePicture from '../assets/profilePicture.png'
-
 const apprentices = [
     {
         id: '001',
         ProfilePicture: require('../assets/profilePicture2.png'),
         name: 'Caio Rodrigues',
         department: 'IT - Information Technology',
-        rating:  '4.2'
+        rating: '4.2'
     },
     {
         id: '002',
         ProfilePicture: require('../assets/profilePicture3.png'),
         name: 'Miguel Ferreira',
         department: 'HR - Human Resources',
-        rating:  '3.2'
+        rating: '3.2'
     },
     {
         id: '003',
         ProfilePicture: require('../assets/profilePicture4.png'),
         name: 'Valéria Ferreira',
         department: 'PD - Product Development',
-        rating:  '4.8'
+        rating: '4.8'
     },
     {
         id: '004',
         ProfilePicture: require('../assets/profilePicture5.png'),
         name: 'Luiza Martins',
         department: 'DM - Data Management',
-        rating:  '4.5'
+        rating: '4.5'
     },
 ]
 
@@ -49,31 +46,31 @@ export default function ApprenticeList() {
             <Animatable.View animation='fadeInRight' delay={400}>
                 <FlatList
                     data={apprentices}
-                    keyExtractor={item=>item.id}
-                    renderItem={({item})=><View>
-                                            <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
-                                                <View style={styles.apprenticePictureContainer}>
-                                                    <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
-                                                </View>
-                                                <View style={styles.apprenticeInfoContainer}>
-                                                    <Text style={styles.apprenticeName}>{item.name}</Text>
+                    keyExtractor={item => item.id}
+                    renderItem={({ item }) => <View>
+                        <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
+                            <View style={styles.apprenticePictureContainer}>
+                                <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
+                            </View>
+                            <View style={styles.apprenticeInfoContainer}>
+                                <Text style={styles.apprenticeName}>{item.name}</Text>
 
-                                                    <Text style={styles.apprenticeDepartment}> {item.department}</Text>
-                                                </View>
-                                                <View style={styles.apprenticeRatingContainer}>
-                                                    <View>
-                                                        <StarIcon/>
-                                                    </View>
-                                                    <View>
-                                                        <Text style={styles.apprenticeRating}> {item.rating}</Text>
-                                                    </View>
-                                                </View>
-                                            </TouchableOpacity>
-                                        </View>}
+                                <Text style={styles.apprenticeDepartment}> {item.department}</Text>
+                            </View>
+                            <View style={styles.apprenticeRatingContainer}>
+                                <View>
+                                    <StarIcon />
+                                </View>
+                                <View>
+                                    <Text style={styles.apprenticeRating}> {item.rating}</Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>}
                 />
-        </Animatable.View>
+            </Animatable.View>
         </View>
-        
+
     );
 }
 
@@ -104,8 +101,9 @@ const styles = StyleSheet.create({
 
     apprenticePicture: {
         width: 50,
-        height: 50
-,    },
+        height: 50,
+        borderRadius: 100,
+    },
 
     apprenticeInfoContainer: {
         display: 'flex',

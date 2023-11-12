@@ -13,7 +13,7 @@ export const userStore = {
       this.state.currentUser = await authController.create(payload)
     } catch (error) {
       if(error.code === 'auth/email-already-in-use') return Alert.alert('Erro', 'Este email já está em uso', [{type: 'OK'}])
-      if(error.code === 'auth/weak-password') return Alert.alert('Erro', 'A senha deve conter no minimo 6 digitos', [{type: 'OK'}])
+      if(error.code === 'auth/weak-password') return Alert.alert('Erro', 'A senha deve conter no minimo 8 digitos', [{type: 'OK'}])
       return console.log(error)
     }
   },
