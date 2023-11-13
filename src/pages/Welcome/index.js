@@ -9,7 +9,7 @@ export default function Welcome() {
     const navigation = useNavigation()
 
     useEffect(() => {
-        if (store.user.state.currentUser) return console.log('logado')
+        if (store.user.state.currentUser) return
 
         AsyncStorage.getItem('auth').then(async auth => {
             if (!auth) return
@@ -18,7 +18,7 @@ export default function Welcome() {
             await store.user.login(payload)
             if (store.user.state.currentUser) navigation.navigate('Home')
         })
-    })
+    }, [])
 
 
     return (

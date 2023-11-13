@@ -1,38 +1,27 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
-import StarIcon from './icons/StarIcon'
+import { View, Text, StyleSheet, Image } from 'react-native'
 
-
-const id = '001'
 const profilePicture = require('../assets/profilePicture2.png')
-const name = 'Caio Rodrigues'
-const department = 'IT - Information Technology'
-const rating = '4.2'
 
-const desempenho = 4
-const pontualidade = 5
-const comunicacao = 3
-
-
-export default function ApprenticeHeader() {
-    const navigation = useNavigation();
-
+export default function ApprenticeHeader(props) {
     return (
         <View>
             <View style={styles.headerBar}>
-                <Text style={styles.apprenticeName}> {name} </Text>
+                <Text style={styles.apprenticeName}> {props.name} </Text>
             </View>
             <View style={styles.userContainer}>
-                <Image source={profilePicture} style={styles.profilePicture}/>
-                <Text style={styles.apprenticeDepartment}> {department} </Text>
+                {props.image ? (
+                    <Image style={styles.profilePicture} src={`https://firebasestorage.googleapis.com/v0/b/ati-upx6.appspot.com/o/images%2F${props.image}?alt=media`} />
+                ) : (
+                    <Image style={styles.profilePicture} source={require('../assets/avatar.png')} />
+                )}
+                <Text style={styles.apprenticeDepartment}> {props.department} </Text>
             </View>
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
-
     headerBar: {
         backgroundColor: '#004DA1',
     },
@@ -54,6 +43,7 @@ const styles = StyleSheet.create({
     profilePicture: {
         alignSelf: 'center',
         bottom: -60,
+        borderRadius: 100
     },
 
     apprenticeDepartment: {
@@ -64,4 +54,3 @@ const styles = StyleSheet.create({
         bottom: -75,
     },
 })
-

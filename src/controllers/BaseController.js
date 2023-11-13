@@ -1,12 +1,17 @@
-import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
+import { collection, doc, getDoc, getDocs, setDoc, updateDoc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { uploadBytes } from "firebase/storage";
 
 export default class BaseController {
   async upload(uid, file) {
-    const storageRef = ref(storage, `/images/${uid}`)
+    const storageRef = ref(storage, `${uid}`)
     const snapshot = await uploadBytes(storageRef, file)
     return snapshot.metadata.fullPath
+  }
+
+  async getDocRef(docRef) {
+    const res = await getDoc(docRef)
+    return res.data()
   }
 
   async getDocument(document, collection, data = true) {

@@ -1,81 +1,73 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from 'react-native'
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Button, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import StarIcon from './icons/StarIcon'
-
-const apprentices = [
-    {
-        id: '001',
-        ProfilePicture: require('../assets/profilePicture2.png'),
-        name: 'Caio Rodrigues',
-        department: 'IT - Information Technology',
-        rating: '4.2'
-    },
-    {
-        id: '002',
-        ProfilePicture: require('../assets/profilePicture3.png'),
-        name: 'Miguel Ferreira',
-        department: 'HR - Human Resources',
-        rating: '3.2'
-    },
-    {
-        id: '003',
-        ProfilePicture: require('../assets/profilePicture4.png'),
-        name: 'Valéria Ferreira',
-        department: 'PD - Product Development',
-        rating: '4.8'
-    },
-    {
-        id: '004',
-        ProfilePicture: require('../assets/profilePicture5.png'),
-        name: 'Luiza Martins',
-        department: 'DM - Data Management',
-        rating: '4.5'
-    },
-]
+import { store } from '../store';
 
 export default function ApprenticeList() {
-    const navigation = useNavigation();
+    const navigation = useNavigation()
+
+    const [loading, setLoading] = useState(false)
+    const [apprentices, setApprentices] = useState([])
+    
+
+    useEffect(() => {
+        const get = async () => {
+            setLoading(true)
+            await store.manager.get(store.user.state.currentUser.uid)
+            setApprentices(store.manager.state.manager.apprentices)
+            setLoading(false)
+        }
+
+        get()
+    }, [])
 
     return (
         <View style={styles.apprenticeListContainer}>
-            <Animatable.View animation='fadeIn' delay={400}>
-                <Text style={styles.apprenticeText}>Aprendizes</Text>
-            </Animatable.View>
-            <Animatable.View animation='fadeInRight' delay={400}>
-                <FlatList
-                    data={apprentices}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <View>
-                        <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice')}>
-                            <View style={styles.apprenticePictureContainer}>
-                                <Image style={styles.apprenticePicture} source={item.ProfilePicture} />
-                            </View>
-                            <View style={styles.apprenticeInfoContainer}>
-                                <Text style={styles.apprenticeName}>{item.name}</Text>
+            {loading ? (
+                <ActivityIndicator size='large' color='004DA1' />
+            ) : (
+                <>
+                    <Animatable.View animation='fadeIn' delay={400}>
+                        <Text style={styles.apprenticeText}>Aprendizes</Text>
+                    </Animatable.View>
+                    <Animatable.View animation='fadeInRight' delay={400}>
+                        <FlatList
+                            data={apprentices}
+                            keyExtractor={item => item.uid}
+                            renderItem={({ item }) => <View>
+                                <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice', { apprentice: item })}>
+                                    <View style={styles.apprenticePictureContainer}>
+                                        { item.image ? (
+                                            <Image style={styles.apprenticePicture} src={`https://firebasestorage.googleapis.com/v0/b/ati-upx6.appspot.com/o/images%2F${item.image}?alt=media`} />
+                                        ) : (
+                                            <Image style={styles.apprenticePicture} source={require('../assets/avatar.png')} />
+                                        )}
+                                    </View>
+                                    <View style={styles.apprenticeInfoContainer}>
+                                        <Text style={styles.apprenticeName}>{item.name}</Text>
 
-                                <Text style={styles.apprenticeDepartment}> {item.department}</Text>
-                            </View>
-                            <View style={styles.apprenticeRatingContainer}>
-                                <View>
-                                    <StarIcon />
-                                </View>
-                                <View>
-                                    <Text style={styles.apprenticeRating}> {item.rating}</Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>}
-                />
-            </Animatable.View>
+                                        <Text style={styles.apprenticeDepartment}> {item.department}</Text>
+                                    </View>
+                                    <View style={styles.apprenticeRatingContainer}>
+                                        <View>
+                                            <StarIcon />
+                                        </View>
+                                        <View>
+                                            <Text style={styles.apprenticeRating}> {item.rating}</Text>
+                                        </View>
+                                    </View>
+                                </TouchableOpacity>
+                            </View>} />
+                    </Animatable.View>
+                </>
+            )}
         </View>
-
-    );
+    )
 }
 
 const styles = StyleSheet.create({
-
     apprenticeText: {
         marginLeft: 20,
         marginBottom: 20,

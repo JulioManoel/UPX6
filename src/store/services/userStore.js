@@ -23,7 +23,7 @@ export const userStore = {
       this.state.currentUser = await authController.login(payload)
     } catch (error) {
       if(error.code === 'auth/invalid-login-credentials') return Alert.alert('Erro', 'Login Invalido', [{type: 'OK'}])
-      console.log(error.code)
+      console.log(error)
     }
   }
 }

@@ -13,7 +13,7 @@ export default function Register({ navigation }) {
     const onSubmit = async () => {
         setLoading(true)
         
-        if (password === confirmPassword) await store.user.create({name, email, password})
+        if (password === confirmPassword) await store.user.create({name, email, password, isManager: true})
         if (store.user.state.currentUser) navigation.navigate('Home')
         
         setLoading(false)

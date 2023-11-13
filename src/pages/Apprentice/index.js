@@ -1,25 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import { View } from 'react-native'
 import ApprenticeHeader from '../../components/ApprenticeHeader'
 import ApprenticeRating from '../../components/ApprenticeRating'
-import * as Animatable from 'react-native-animatable'
 
 
-export default function Apprentice() {
-    const navigation = useNavigation();
-
+export default function Apprentice({ route }) {
     return (
-        <View style={styles.container}>
-            <ApprenticeHeader/>
-            <ApprenticeRating/>
+        <View>
+            <ApprenticeHeader name={route.params.apprentice.name} department={route.params.apprentice.department} image={route.params.apprentice.image} />
+            <ApprenticeRating />
         </View>
-    );
+    )
 }
-
-const styles = StyleSheet.create({
-
-
-
-})
 

@@ -3,14 +3,13 @@ import { View, StyleSheet } from 'react-native'
 import ApprenticeList from '../../components/ApprenticesList';
 import ManagerHeader from '../../components/ManagerHeader'
 
-
 export default function Home() {
     return (
         <View style={styles.container}>
             <ManagerHeader style={styles.ManagerHeader}/>
             <ApprenticeList style={styles.ApprenticeList} />
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -27,6 +26,4 @@ const styles = StyleSheet.create({
     apprenticeList: {
         flex: 2,
     },
-
 })
-
