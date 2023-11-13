@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList, Button, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable'
 import StarIcon from './icons/StarIcon'
+import PlusIcon from './icons/PlusIcon';
 import { store } from '../store';
+
 
 export default function ApprenticeList() {
     const navigation = useNavigation()
@@ -33,6 +35,10 @@ export default function ApprenticeList() {
                         <Text style={styles.apprenticeText}>Aprendizes</Text>
                     </Animatable.View>
                     <Animatable.View animation='fadeInRight' delay={400}>
+                    <TouchableOpacity onPress={() => navigation.navigate('ApprenticeRegister')} style={styles.newApprentice}>
+                        <PlusIcon iconSize={20}/>
+                        <Text style={styles.newApprenticeText}>Cadastrar novo aprendiz</Text>
+                    </TouchableOpacity>
                         <FlatList
                             data={apprentices}
                             keyExtractor={item => item.uid}
@@ -77,6 +83,24 @@ const styles = StyleSheet.create({
 
     apprenticeListContainer: {
         marginTop: '16%',
+    },
+    
+    newApprentice: {
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        margin: 5,
+        padding: 10,
+        alignSelf: 'center',
+        width: '90%',
+        backgroundColor: '#E6E6E6',
+        borderRadius: 10,
+    },
+
+    newApprenticeText: {
+        marginLeft: 8,
+        fontSize: 16,
+        fontWeight: '500'
     },
 
     apprenticeCard: {

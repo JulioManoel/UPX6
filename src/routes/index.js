@@ -6,6 +6,7 @@ import Register from '../pages/Register'
 import Home from '../pages/Home'
 import Apprentice from '../pages/Apprentice'
 import Evaluation from '../pages/Evaluation'
+import ApprenticeRegister from '../pages/ApprenticeRegister'
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,13 @@ export default function Routes(){
         <Stack.Screen
             name='Evaluation'
             component={Evaluation}
+            options={{ headerShown: false} }
+            
+        />
+   
+        <Stack.Screen
+            name='ApprenticeRegister'
+            component={ApprenticeRegister}
             options={{ headerShown: false} }
             
         />

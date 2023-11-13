@@ -42,6 +42,8 @@ const styles = StyleSheet.create({
 
     profilePicture: {
         alignSelf: 'center',
+        width: 50,
+        height: 50,
         bottom: -60,
         borderRadius: 100
     },
