@@ -1,37 +1,58 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
+import React, { useState } from 'react'
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native'
 import * as Animatable from 'react-native-animatable'
-import Slider from '@react-native-community/slider'
-import EvaluationSlider from './EvaluationSlider';
+import EvaluationSlider from './EvaluationSlider'
+import { store } from '../store'
 
 
-export default function ApprenticeEvaluation() {
-    const navigation = useNavigation();
-    const [range, setRange] = useState('50%')
-    const [sliding,setSliding] = useState('Inactive')
+export default function ApprenticeEvaluation(props) {
+    const navigation = useNavigation()
+
+    const [apprentice] = useState(props.user)
+    const [performance, setPerformance] = useState(3)
+    const [punctuality, setPunctuality] = useState(3)
+    const [communication, setComunication] = useState(3)
+    const [loading, setLoading] = useState(false)
+
+    const onSubmit = async () => {
+        setLoading(true)
+
+        apprentice.evaluation.performance.push(performance)
+        apprentice.evaluation.punctuality.push(punctuality)
+        apprentice.evaluation.communication.push(communication)
+        await store.manager.update(apprentice)
+        navigation.navigate('Home')
+
+        setLoading(false)
+    }
 
     return (
         <View>
             <View animation='fadeInLeft' delay={200} style={styles.ratingsContainer}>
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Desempenho</Text>
-                    <EvaluationSlider/>
+                    <EvaluationSlider value={performance} set={setPerformance} />
                 </View>
+
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Pontualidade</Text>
-                    <EvaluationSlider/>
+                    <EvaluationSlider value={punctuality} set={setPunctuality} />
                 </View>
+
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Comunicação</Text>
-                    <EvaluationSlider/>
+                    <EvaluationSlider value={communication} set={setComunication} />
                 </View>
             </View>
+
             <Animatable.View animation='fadeInUp' delay={200} style={styles.evaluateContainer}>
-                <TouchableOpacity 
-                    style={styles.evaluateButton}
-                    onPress={() => navigation.navigate('Apprentice')}>
+                <TouchableOpacity style={styles.evaluateButton} onPress={() => onSubmit()}>
+                    { loading ? (
+                        <ActivityIndicator size='large' color='#ffffff' />
+                    ) : (
                         <Text style={styles.evaluateButtonText}>CONCLUIR</Text>
+                    )}    
                 </TouchableOpacity>
             </Animatable.View>
         </View>

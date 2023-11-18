@@ -1,16 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import * as Animatable from 'react-native-animatable'
+import { View, Text, StyleSheet } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { StatusBar } from 'expo-status-bar';
 
 
-export default function EvaluationSlider() {
-    const navigation = useNavigation();
-    const [range, setRange] = useState('50%')
-    const [sliding, setSliding] = useState('Inactive')
-
+export default function EvaluationSlider(props) {
     return (
         <View style={styles.container}>
             <Slider
@@ -20,9 +15,9 @@ export default function EvaluationSlider() {
                 minimumTrackTintColor='#196DC9'
                 maximumTrackTintColor='#F5F5F5'
                 thumbTintColor='#196DC9'
-                value={3}
+                value={props.value}
                 step={1}
-                onValueChange={value => setRange(parseInt(value))}
+                onValueChange={value => props.set(parseInt(value))}
             />
             <View style={styles.sliderValues}>
                 <Text style={styles.biggerNum}>1</Text>

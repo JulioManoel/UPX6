@@ -24,4 +24,16 @@ export const managerStore = {
   async get(uid) {
     this.state.manager = await managerController.get(uid)
   },
+
+  async update(payload) {
+    try {
+      const res = await managerController.update(payload)
+      let apprentice = this.state.manager.apprenticesObj.find(apprentice => apprentice.uid === res.uid)
+      apprentice = res
+
+      console.log(this.state.manager.apprenticesObj)
+    } catch (error) {
+      return console.log(error)
+    }
+  }
 }

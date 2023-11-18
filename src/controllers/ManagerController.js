@@ -37,10 +37,10 @@ export default class ManagerController extends BaseController {
     const { communication, performance, punctuality } = apprentice.evaluation
     let sum = 0
 
-    for (let i; i < communication.length; i++)
+    for (let i = 0; i < communication.length; i++)
       sum += communication[i] + performance[i] + punctuality[i]
 
-    apprentice.rating = sum === 0 ? '-' : (sum / communication.length * 3).toFixed(1)
+    apprentice.rating = sum === 0 ? '-' : (sum / (communication.length * 3)).toFixed(1)
     return apprentice
   }
 
@@ -54,5 +54,10 @@ export default class ManagerController extends BaseController {
     }
 
     return new Manager({ ...res, apprenticesObj })
+  }
+
+  async update(payload, uid) {
+    await super.updateDocument('Users', payload.uid, payload)
+    return this.set(payload)
   }
 }

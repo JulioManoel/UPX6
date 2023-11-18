@@ -1,19 +1,18 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet } from 'react-native'
 import ApprenticeHeader from '../../components/ApprenticeHeader'
 import ApprenticeEvaluation from '../../components/ApprenticeEvaluation'
 import * as Animatable from 'react-native-animatable'
 
 
-export default function Evaluation() {
-    const navigation = useNavigation();
+export default function Evaluation({ route }) {
+    const [user] = useState(route.params.apprentice)
 
     return (
         <View>
-            <ApprenticeHeader/>
+            <ApprenticeHeader user={user} />
             <Animatable.View animation={'fadeInUp'}>
-                <ApprenticeEvaluation/>
+                <ApprenticeEvaluation user={user} />
             </Animatable.View>
         </View>
     );

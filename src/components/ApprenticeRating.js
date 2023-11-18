@@ -12,9 +12,9 @@ export default function ApprenticeRating(props) {
         return sum ? sum / rating.lenght : '-'
     }
 
-    const [performance] = useState(calculator(props.performance))
-    const [punctuality] = useState(calculator(props.punctuality))
-    const [communication] = useState(calculator(props.communication))
+    const [performance] = useState(calculator(props.user.evaluation.performance))
+    const [punctuality] = useState(calculator(props.user.evaluation.punctuality))
+    const [communication] = useState(calculator(props.user.evaluation.communication))
 
     return (
         <View>
@@ -46,7 +46,7 @@ export default function ApprenticeRating(props) {
             <Animatable.View animation='fadeInUp' delay={200} style={styles.evaluateContainer}>
                 <TouchableOpacity 
                     style={styles.evaluateButton}
-                    onPress={() => navigation.navigate('Evaluation')}>
+                    onPress={() => navigation.navigate('Evaluation', {apprentice: props.user})}>
                         <Text style={styles.evaluateButtonText}>AVALIAR</Text>
                 </TouchableOpacity>
             </Animatable.View>
