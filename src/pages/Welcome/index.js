@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable'
-import { useNavigation } from '@react-navigation/native'
-import { store } from '../../store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { store } from '../../store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export default function Welcome() {
     const navigation = useNavigation()
 
-    useEffect(() => {
+    useFocusEffect(() => {
         if (store.user.state.currentUser) return
 
         AsyncStorage.getItem('auth').then(async auth => {
@@ -18,8 +18,7 @@ export default function Welcome() {
             await store.user.login(payload)
             if (store.user.state.currentUser) navigation.navigate('Home')
         })
-    }, [])
-
+    })
 
     return (
         <View style={styles.container}>

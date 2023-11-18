@@ -6,19 +6,19 @@ import StarIcon from './icons/StarIcon'
 import PlusIcon from './icons/PlusIcon';
 import { store } from '../store';
 
-
 export default function ApprenticeList() {
     const navigation = useNavigation()
 
     const [loading, setLoading] = useState(false)
     const [apprentices, setApprentices] = useState([])
     
-
     useEffect(() => {
         const get = async () => {
             setLoading(true)
+
             await store.manager.get(store.user.state.currentUser.uid)
-            setApprentices(store.manager.state.manager.apprentices)
+            setApprentices(store.manager.state.manager.apprenticesObj)
+
             setLoading(false)
         }
 
