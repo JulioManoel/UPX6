@@ -5,7 +5,7 @@ import ApprenticeRating from '../../components/ApprenticeRating'
 
 
 export default function Apprentice({ route }) {
-    const [user, setUser] = useState(route.params.apprentice)
+    const [user] = useState(route.params.apprentice)
 
     return (
         <View>

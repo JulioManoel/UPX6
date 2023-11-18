@@ -1,43 +1,45 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import StarIcon from './icons/StarIcon'
 import * as Animatable from 'react-native-animatable'
 
-const rating = '4.2'
-
-const desempenho = 5
-const pontualidade = 5
-const comunicacao = 3
-
-
 export default function ApprenticeRating(props) {
     const navigation = useNavigation()
+
+    const calculator = rating => {
+        const sum = rating.reduce((accumulator, value) => accumulator + value, 0)
+        return sum ? sum / rating.lenght : '-'
+    }
+
+    const [performance] = useState(calculator(props.performance))
+    const [punctuality] = useState(calculator(props.punctuality))
+    const [communication] = useState(calculator(props.communication))
 
     return (
         <View>
             <Animatable.View animation={'fadeIn'} delay={150} style={styles.generalRating}>
                 <StarIcon iconSize={32} style={styles.starIcon}/>
-                <Text style={styles.apprenticeRating}>{rating}</Text>
+                <Text style={styles.apprenticeRating}>{props.rating}</Text>
             </Animatable.View>
 
             <Animatable.View animation='fadeInLeft' delay={200} style={styles.ratingsContainer}>
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Desempenho</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
-                    <Text style={styles.subjectRating}>{desempenho}</Text>
+                    <Text style={styles.subjectRating}>{performance}</Text>
                 </View>
 
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Pontualidade</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
-                    <Text style={styles.subjectRating}>{pontualidade}</Text>
+                    <Text style={styles.subjectRating}>{punctuality}</Text>
                 </View>
 
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Comunicação</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
-                    <Text style={styles.subjectRating}>{comunicacao}</Text>
+                    <Text style={styles.subjectRating}>{communication}</Text>
                 </View>
             </Animatable.View>
 
@@ -53,7 +55,6 @@ export default function ApprenticeRating(props) {
 }
 
 const styles = StyleSheet.create({
-
     generalRating: {
         marginTop: 90,
         width: '100%',
