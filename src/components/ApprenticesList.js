@@ -36,7 +36,7 @@ export default function ApprenticeList() {
                     </Animatable.View>
 
                     <Animatable.View animation='fadeInRight' delay={400}>
-                        <TouchableOpacity onPress={() => navigation.navigate('ApprenticeRegister')} style={styles.newApprentice}>
+                        <TouchableOpacity onPress={() => navigation.navigate('ApprenticeRegister', { replace: true })} style={styles.newApprentice}>
                             <PlusIcon iconSize={20}/>
                             <Text style={styles.newApprenticeText}>Cadastrar novo aprendiz</Text>
                         </TouchableOpacity>
@@ -45,7 +45,7 @@ export default function ApprenticeList() {
                             data={apprentices}
                             keyExtractor={item => item.uid}
                             renderItem={({ item }) => <View>
-                                <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice', { apprentice: item })}>
+                                <TouchableOpacity style={styles.apprenticeCard} onPress={() => navigation.navigate('Apprentice', { apprentice: item, replace: true })}>
                                     <View style={styles.apprenticePictureContainer}>
                                         { item.image ? (
                                             <Image style={styles.apprenticePicture} src={`https://firebasestorage.googleapis.com/v0/b/ati-upx6.appspot.com/o/images%2F${item.image}?alt=media`} />

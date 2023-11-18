@@ -16,7 +16,7 @@ export default function Welcome() {
 
             const payload = JSON.parse(auth)
             await store.user.login(payload)
-            if (store.user.state.currentUser) navigation.navigate('Home')
+            if (store.user.state.currentUser) navigation.navigate('Home', { replace: true })
         })
     })
 
@@ -39,7 +39,7 @@ export default function Welcome() {
 
                 <TouchableOpacity
                     style={styles.button}
-                    onPress={() => navigation.navigate('SignIn')}>
+                    onPress={() => navigation.navigate('SignIn', { replace: true })}>
                     <Text style={styles.buttonText}>Vamos lá!</Text>
                 </TouchableOpacity>
             </Animatable.View>

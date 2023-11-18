@@ -22,7 +22,7 @@ export default function ApprenticeEvaluation(props) {
         apprentice.evaluation.punctuality.push(punctuality)
         apprentice.evaluation.communication.push(communication)
         await store.manager.update(apprentice)
-        navigation.navigate('Home')
+        navigation.navigate('Home', { replace: true })
 
         setLoading(false)
     }

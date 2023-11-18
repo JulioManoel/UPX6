@@ -18,7 +18,7 @@ export default function ApprenticeRegisterForm() {
         setLoading(true)
 
         const res = await store.manager.create({ name, email, password, department }, store.manager.state.manager.apprentices)
-        if(res) navigation.navigate('Home', { replace: true})
+        if(res) navigation.navigate('Home', { replace: true })
 
         setLoading(false)
     }

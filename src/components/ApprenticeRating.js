@@ -46,7 +46,7 @@ export default function ApprenticeRating(props) {
             <Animatable.View animation='fadeInUp' delay={200} style={styles.evaluateContainer}>
                 <TouchableOpacity 
                     style={styles.evaluateButton}
-                    onPress={() => navigation.navigate('Evaluation', {apprentice: props.user})}>
+                    onPress={() => navigation.navigate('Evaluation', { apprentice: props.user, replace: true })}>
                         <Text style={styles.evaluateButtonText}>AVALIAR</Text>
                 </TouchableOpacity>
             </Animatable.View>

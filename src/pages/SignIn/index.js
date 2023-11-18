@@ -12,7 +12,7 @@ export default function SignIn({ navigation }) {
         setLoading(true)
 
         await store.user.login({ email, password })
-        if (store.user.state.currentUser) navigation.navigate('Home')
+        if (store.user.state.currentUser) navigation.navigate('Home', { replace: true })
 
         setLoading(false)
     }
@@ -42,7 +42,7 @@ export default function SignIn({ navigation }) {
 
                 <Text style={styles.alternativeText}>ou</Text>
 
-                <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register')}>
+                <TouchableOpacity style={styles.registerButton} onPress={() => navigation.navigate('Register', { replace: true })}>
                     <Text style={styles.registerButtonText}>Cadastre-se</Text>
                 </TouchableOpacity>
             </Animatable.View>

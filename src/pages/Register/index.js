@@ -14,7 +14,7 @@ export default function Register({ navigation }) {
         setLoading(true)
         
         if (password === confirmPassword) await store.user.create({name, email, password})
-        if (store.user.state.currentUser) navigation.navigate('Home')
+        if (store.user.state.currentUser) navigation.navigate('Home', { replace: true })
         
         setLoading(false)
     }
