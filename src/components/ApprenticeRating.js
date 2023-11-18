@@ -1,13 +1,9 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import StarIcon from './icons/StarIcon'
 import * as Animatable from 'react-native-animatable'
 
-const id = '001'
-const profilePicture = require('../assets/profilePicture2.png')
-const name = 'Caio Rodrigues'
-const department = 'IT - Information Technology'
 const rating = '4.2'
 
 const desempenho = 5
@@ -15,32 +11,36 @@ const pontualidade = 5
 const comunicacao = 3
 
 
-export default function ApprenticeRating() {
-    const navigation = useNavigation();
+export default function ApprenticeRating(props) {
+    const navigation = useNavigation()
 
     return (
         <View>
             <Animatable.View animation={'fadeIn'} delay={150} style={styles.generalRating}>
                 <StarIcon iconSize={32} style={styles.starIcon}/>
-                <Text style={styles.apprenticeRating}> {rating}</Text>
+                <Text style={styles.apprenticeRating}>{rating}</Text>
             </Animatable.View>
+
             <Animatable.View animation='fadeInLeft' delay={200} style={styles.ratingsContainer}>
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Desempenho</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
                     <Text style={styles.subjectRating}>{desempenho}</Text>
                 </View>
+
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Pontualidade</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
                     <Text style={styles.subjectRating}>{pontualidade}</Text>
                 </View>
+
                 <View style={styles.subjectContainer}>
                     <Text style={styles.subjectName}>Comunicação</Text>
                     <StarIcon iconSize={24} style={styles.starIcon}/>
                     <Text style={styles.subjectRating}>{comunicacao}</Text>
                 </View>
             </Animatable.View>
+
             <Animatable.View animation='fadeInUp' delay={200} style={styles.evaluateContainer}>
                 <TouchableOpacity 
                     style={styles.evaluateButton}

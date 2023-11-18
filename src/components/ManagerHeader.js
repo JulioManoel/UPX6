@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { store } from '../store';
 
 
 export default function ManagerHeader() {
-    const userName = store.user.state.currentUser.displayName
+    const [user, setUser] = useState(store.user.state.currentUser)
 
     return (
         <View>
@@ -12,8 +12,8 @@ export default function ManagerHeader() {
                 <Text style={styles.managerText}>GESTOR</Text>
             </View>
             <View style={styles.container}>
-                <Text style={styles.welcomeText}>Olá, {userName}!</Text>
-                <Image source={require('../assets/profilePicture.png')} style={styles.profilePicture}/>
+                <Text style={styles.welcomeText}>Olá, {user.displayName}!</Text>
+                <Image src={`https://api.multiavatar.com/${user.uid}.png`} style={styles.profilePicture}/>
             </View>
         </View>
     );

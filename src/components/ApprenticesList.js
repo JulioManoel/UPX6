@@ -34,11 +34,13 @@ export default function ApprenticeList() {
                     <Animatable.View animation='fadeIn' delay={400}>
                         <Text style={styles.apprenticeText}>Aprendizes</Text>
                     </Animatable.View>
+
                     <Animatable.View animation='fadeInRight' delay={400}>
-                    <TouchableOpacity onPress={() => navigation.navigate('ApprenticeRegister')} style={styles.newApprentice}>
-                        <PlusIcon iconSize={20}/>
-                        <Text style={styles.newApprenticeText}>Cadastrar novo aprendiz</Text>
-                    </TouchableOpacity>
+                        <TouchableOpacity onPress={() => navigation.navigate('ApprenticeRegister')} style={styles.newApprentice}>
+                            <PlusIcon iconSize={20}/>
+                            <Text style={styles.newApprenticeText}>Cadastrar novo aprendiz</Text>
+                        </TouchableOpacity>
+                        
                         <FlatList
                             data={apprentices}
                             keyExtractor={item => item.uid}
@@ -48,7 +50,7 @@ export default function ApprenticeList() {
                                         { item.image ? (
                                             <Image style={styles.apprenticePicture} src={`https://firebasestorage.googleapis.com/v0/b/ati-upx6.appspot.com/o/images%2F${item.image}?alt=media`} />
                                         ) : (
-                                            <Image style={styles.apprenticePicture} source={require('../assets/avatar.png')} />
+                                            <Image style={styles.apprenticePicture} src={`https://api.multiavatar.com/${item.uid}.png`} />
                                         )}
                                     </View>
                                     <View style={styles.apprenticeInfoContainer}>

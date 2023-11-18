@@ -6,8 +6,8 @@ import ManagerHeader from '../../components/ManagerHeader'
 export default function Home() {
     return (
         <View style={styles.container}>
-            <ManagerHeader style={styles.ManagerHeader}/>
-            <ApprenticeList style={styles.ApprenticeList} />
+            <ManagerHeader style={styles.managerHeader}/>
+            <ApprenticeList style={styles.apprenticeList} />
         </View>
     )
 }

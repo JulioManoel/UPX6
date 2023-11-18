@@ -12,7 +12,6 @@ export const managerStore = {
     try {
       const apprentice = await managerController.create(payload, apprentices)
       this.state.manager.apprenticesObj.push(apprentice)
-      console.log(this.state.manager.apprenticesObj)
       return true
     } catch (error) {
       if(error.code === 'auth/email-already-in-use') return Alert.alert('Erro', 'Este email já está em uso', [{type: 'OK'}])

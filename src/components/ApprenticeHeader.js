@@ -1,8 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native'
 
-const profilePicture = require('../assets/profilePicture2.png')
-
 export default function ApprenticeHeader(props) {
     return (
         <View>
@@ -13,7 +11,7 @@ export default function ApprenticeHeader(props) {
                 {props.image ? (
                     <Image style={styles.profilePicture} src={`https://firebasestorage.googleapis.com/v0/b/ati-upx6.appspot.com/o/images%2F${props.image}?alt=media`} />
                 ) : (
-                    <Image style={styles.profilePicture} source={require('../assets/avatar.png')} />
+                    <Image style={styles.profilePicture} src={`https://api.multiavatar.com/${props.uid}.png`} />
                 )}
                 <Text style={styles.apprenticeDepartment}> {props.department} </Text>
             </View>
