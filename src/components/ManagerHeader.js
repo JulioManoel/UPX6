@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 import { store } from '../store';
 import PowerOffIcon from './icons/PowerOffIcon';
 
 
 export default function ManagerHeader() {
+    const navigation = useNavigation()
     const [user, setUser] = useState(store.user.state.currentUser)
+
+    const logout = async () => {
+        await store.user.logout()
+        navigation.navigate('Welcome')
+    }
 
     return (
         <View>
             <View style={styles.headerBar}>
                 <Text style={styles.managerText}>GESTOR</Text>
-                <TouchableOpacity style={styles.logoutButton}>
+                <TouchableOpacity style={styles.logoutButton} onPress={() => logout()}>
                     <PowerOffIcon iconSize={24} style={styles.powerOffIcon}/>
                 </TouchableOpacity>
             </View>

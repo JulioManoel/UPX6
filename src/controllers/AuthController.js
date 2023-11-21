@@ -28,4 +28,9 @@ export default class AuthController extends BaseController {
 
     return new User(auth.currentUser)
   }
+
+  async logout() {
+    await auth.signOut()
+    await AsyncStorage.clear()
+  }
 }

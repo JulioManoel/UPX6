@@ -25,5 +25,9 @@ export const userStore = {
       if(error.code === 'auth/invalid-login-credentials') return Alert.alert('Erro', 'Login Invalido', [{type: 'OK'}])
       return console.log(error)
     }
+  },
+
+  async logout() {
+    await authController.logout()
   }
 }

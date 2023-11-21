@@ -12,10 +12,6 @@ export default function ApprenticeRating(props) {
         return sum ? (sum / rating.length).toFixed(1) : '-'
     }
 
-    const createPdf = async () => {
-        
-    }
-
     const [performance] = useState(calculator(props.user.evaluation.performance))
     const [punctuality] = useState(calculator(props.user.evaluation.punctuality))
     const [communication] = useState(calculator(props.user.evaluation.communication))
