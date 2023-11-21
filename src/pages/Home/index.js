@@ -26,4 +26,5 @@ const styles = StyleSheet.create({
     apprenticeList: {
         flex: 2,
     },
+    
 })
