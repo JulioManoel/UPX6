@@ -9,7 +9,11 @@ export default function ApprenticeRating(props) {
 
     const calculator = rating => {
         const sum = rating.reduce((accumulator, value) => accumulator + value, 0)
-        return sum ? sum / rating.lenght : '-'
+        return sum ? (sum / rating.length).toFixed(1) : '-'
+    }
+
+    const createPdf = async () => {
+        
     }
 
     const [performance] = useState(calculator(props.user.evaluation.performance))
@@ -20,7 +24,7 @@ export default function ApprenticeRating(props) {
         <View>
             <Animatable.View animation={'fadeIn'} delay={150} style={styles.generalRating}>
                 <StarIcon iconSize={32} style={styles.starIcon}/>
-                <Text style={styles.apprenticeRating}>{props.rating}</Text>
+                <Text style={styles.apprenticeRating}>{props.user.rating}</Text>
             </Animatable.View>
 
             <Animatable.View animation='fadeInLeft' delay={200} style={styles.ratingsContainer}>
@@ -48,6 +52,11 @@ export default function ApprenticeRating(props) {
                     style={styles.evaluateButton}
                     onPress={() => navigation.navigate('Evaluation', { apprentice: props.user, replace: true })}>
                         <Text style={styles.evaluateButtonText}>AVALIAR</Text>
+                </TouchableOpacity>
+                <TouchableOpacity 
+                    style={styles.evaluateButton}
+                    onPress={() => createPdf()}>
+                        <Text style={styles.evaluateButtonText}>PDF</Text>
                 </TouchableOpacity>
             </Animatable.View>
         </View>
@@ -89,6 +98,7 @@ const styles = StyleSheet.create({
         marginTop: 100,
         justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'row',
     },
     evaluateButton: {
         backgroundColor: '#196DC9',
@@ -97,6 +107,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 26,
+        margin: 10,
     },
 
     evaluateButtonText: {
